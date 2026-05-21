@@ -1,0 +1,9 @@
+kagglehub
+python-dotenv
+numpy
+torch
+torchvision
+matplotlib
+pandas
+ipykernel
+tqdm
