@@ -7,3 +7,5 @@ matplotlib
 pandas
 ipykernel
 tqdm
+scikit-learn
+mlflow
