@@ -9,3 +9,6 @@ ipykernel
 tqdm
 scikit-learn
 mlflow
+seaborn
+streamlit
+groq
