@@ -83,10 +83,9 @@ def predict(model, img):
     return values, indices # indice das 3 maiores probabilidades
 
 st.sidebar.title("Dashboard")
-app_mode = st.sidebar.selectbox("Selecione:", ["Home", "Sobre", "Disease Recognition"])
+app_mode = st.sidebar.selectbox("", ["Home", "Sobre", "Disease Recognition"])
 
 if app_mode == "Home":
-    st.header("Bem-vindo(a) !")
     image_path = "artifacts/home_page.png"
     st.image(image_path, width="content")
     st.markdown("""
@@ -148,14 +147,15 @@ elif app_mode == "Disease Recognition":
 
         st.divider()
 
-        st.markdown("### 🏆 Ranking")
-        for i, row in df.iterrows():
-            st.write(
-                f"#{i+1} - {row['Classe']} "
-                f"({row['Probabilidade']*100:.2f}%)"
-            )
+        with st.container(border=True):
+            st.markdown("### 🏆 Ranking")
+            for i, row in df.iterrows():
+                st.write(
+                    f"#{i+1} - {row['Classe']} "
+                    f"({row['Probabilidade']*100:.2f}%)"
+                )
 
-            st.progress(float(row["Probabilidade"]))
+                st.progress(float(row["Probabilidade"]))
 
         st.divider()
 
@@ -207,7 +207,7 @@ elif app_mode == "Disease Recognition":
         plt.tight_layout()
         plt.savefig(feature_map_filepath, format='png', dpi=300)
 
-        st.markdown("### Mapa de características do Modelo")
+        st.markdown("### [INTERPRETABILIDADE] Mapa de características do Modelo")
         if feature_map_filepath:
             st.image(feature_map_filepath, width='content')
 
@@ -233,6 +233,7 @@ Response rules:
   2. Main symptoms to confirm
   3. Recommended treatment/care
   4. Prevention tips (optional and brief)
+- If the class informed by user containing the prefix 'healthy', you must give tips to continue to preventing diseases.
 
 Formatting requirements:
 - Use short paragraphs or bullet points.
@@ -249,4 +250,6 @@ The goal is to provide a quick and useful first recommendation for the plant own
             ],
             model="openai/gpt-oss-20b",
         )
-        st.markdown(chat_completion.choices[0].message.content)
+        
+        with st.container(border=True):
+            st.markdown(chat_completion.choices[0].message.content)

@@ -65,7 +65,8 @@ def extract_performance(path, device):
 
     # report
     cr = classification_report(y_true, y_pred, target_names=validation_dataset.classes)
-    print(cr)
+    with open("classification_report.txt", "w") as f:
+        f.write(cr)
 
     # confusion matrix
     labels=list(range(len(validation_dataset.classes)))
