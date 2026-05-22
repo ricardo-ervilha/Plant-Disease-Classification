@@ -211,6 +211,7 @@ elif app_mode == "Disease Recognition":
         if feature_map_filepath:
             st.image(feature_map_filepath, width='content')
 
+        st.divider()
         st.markdown("### Recomendações")
 
         chat_completion = client.chat.completions.create(
